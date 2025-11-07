@@ -1,34 +1,16 @@
-class Student {
-    public int rollNumber;
-    protected String name;
-    private double CGPA;
+package College;
 
-    Student(int r, String n, double c) {
-        rollNumber = r;
-        name = n;
-        CGPA = c;
+public class Student {
+    private String name;
+    private int rollNumber;
+
+    public Student(String name, int rollNumber) {
+        this.name = name;
+        this.rollNumber = rollNumber;
     }
 
-    public void setCGPA(double c) {
-        CGPA = c;
-    }
-
-    public double getCGPA() {
-        return CGPA;
-    }
-}
-
-class PostgraduateStudent extends Student {
-    PostgraduateStudent(int r, String n, double c) {
-        super(r, n, c);
-    }
-
-    void display() {
-        System.out.println("Roll: " + rollNumber + ", Name: " + name + ", CGPA: " + getCGPA());
-    }
-
-    public static void main(String[] args) {
-        PostgraduateStudent ps = new PostgraduateStudent(101, "Ankit", 9.2);
-        ps.display();
+    public void displayStudentDetails() {
+        System.out.println("Student Name: " + name);
+        System.out.println("Roll Number: " + rollNumber);
     }
 }
