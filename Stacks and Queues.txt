@@ -1,0 +1,233 @@
+STACKS, QUEUES & HASHMAP – CORRECT & FINAL CODE
+
+---
+
+1. QUEUE USING TWO STACKS
+
+---
+
+import java.util.*;
+class QStack{
+Stack<Integer>s1=new Stack<>();
+Stack<Integer>s2=new Stack<>();
+void enqueue(int x){s1.push(x);}
+int dequeue(){
+if(s2.isEmpty()){
+while(!s1.isEmpty()) s2.push(s1.pop());
+}
+if(s2.isEmpty()) return -1;
+return s2.pop();
+}
+}
+
+---
+
+2. SORT STACK USING RECURSION
+
+---
+
+import java.util.*;
+class SortStack{
+static void insert(Stack<Integer>s,int x){
+if(s.isEmpty()||s.peek()<=x){s.push(x);return;}
+int t=s.pop();
+insert(s,x);
+s.push(t);
+}
+static void sort(Stack<Integer>s){
+if(!s.isEmpty()){
+int x=s.pop();
+sort(s);
+insert(s,x);
+}
+}
+}
+
+---
+
+3. STOCK SPAN
+
+---
+
+import java.util.*;
+class Stock{
+static void span(int a[]){
+Stack<Integer>s=new Stack<>();
+for(int i=0;i<a.length;i++){
+while(!s.isEmpty()&&a[s.peek()]<=a[i]) s.pop();
+if(s.isEmpty()) System.out.print(i+1+" ");
+else System.out.print(i-s.peek()+" ");
+s.push(i);
+}
+}
+}
+
+---
+
+4. SLIDING WINDOW MAXIMUM
+
+---
+
+import java.util.*;
+class Window{
+static void max(int a[],int k){
+Deque<Integer>d=new ArrayDeque<>();
+for(int i=0;i<a.length;i++){
+while(!d.isEmpty()&&d.peek()<i-k+1) d.poll();
+while(!d.isEmpty()&&a[d.peekLast()]<a[i]) d.pollLast();
+d.add(i);
+if(i>=k-1) System.out.print(a[d.peek()]+" ");
+}
+}
+}
+
+---
+
+5. CIRCULAR TOUR
+
+---
+
+class Tour{
+static int start(int p[],int d[]){
+int start=0,bal=0,def=0;
+for(int i=0;i<p.length;i++){
+bal+=p[i]-d[i];
+if(bal<0){start=i+1;def+=bal;bal=0;}
+}
+return (bal+def>=0)?start:-1;
+}
+}
+
+---
+
+## HASHMAP CODES
+
+1. ZERO SUM SUBARRAY (ALL)
+
+---
+
+import java.util.*;
+class ZeroSum{
+static void find(int a[]){
+HashMap<Integer,ArrayList<Integer>>m=new HashMap<>();
+int sum=0;
+for(int i=0;i<a.length;i++){
+sum+=a[i];
+if(sum==0) System.out.println("0 to "+i);
+if(m.containsKey(sum)){
+for(int x:m.get(sum))
+System.out.println((x+1)+" to "+i);
+}
+m.putIfAbsent(sum,new ArrayList<>());
+m.get(sum).add(i);
+}
+}
+}
+
+---
+
+2. PAIR WITH GIVEN SUM
+
+---
+
+import java.util.*;
+class Pair{
+static boolean check(int a[],int t){
+HashSet<Integer>s=new HashSet<>();
+for(int x:a){
+if(s.contains(t-x)) return true;
+s.add(x);
+}
+return false;
+}
+}
+
+---
+
+3. LONGEST CONSECUTIVE SEQUENCE
+
+---
+
+import java.util.*;
+class Longest{
+static int find(int a[]){
+HashSet<Integer>s=new HashSet<>();
+for(int x:a) s.add(x);
+int max=0;
+for(int x:a){
+if(!s.contains(x-1)){
+int y=x,len=1;
+while(s.contains(y+1)){y++;len++;}
+max=Math.max(max,len);
+}
+}
+return max;
+}
+}
+
+---
+
+4. CUSTOM HASHMAP (WITH CHAINING)
+
+---
+
+class MyMap{
+static class Node{
+int k,v;Node next;
+Node(int k,int v){this.k=k;this.v=v;}
+}
+Node[]b=new Node[100];
+
+void put(int k,int v){
+int i=k%100;
+Node head=b[i];
+for(Node cur=head;cur!=null;cur=cur.next)
+if(cur.k==k){cur.v=v;return;}
+Node n=new Node(k,v);
+n.next=head;
+b[i]=n;
+}
+
+int get(int k){
+int i=k%100;
+for(Node cur=b[i];cur!=null;cur=cur.next)
+if(cur.k==k) return cur.v;
+return -1;
+}
+
+void remove(int k){
+int i=k%100;
+Node cur=b[i],prev=null;
+while(cur!=null){
+if(cur.k==k){
+if(prev==null) b[i]=cur.next;
+else prev.next=cur.next;
+return;
+}
+prev=cur;cur=cur.next;
+}
+}
+}
+
+---
+
+5. TWO SUM
+
+---
+
+import java.util.*;
+class TwoSum{
+static int[] find(int a[],int t){
+HashMap<Integer,Integer>m=new HashMap<>();
+for(int i=0;i<a.length;i++){
+if(m.containsKey(t-a[i]))
+return new int[]{m.get(t-a[i]),i};
+m.put(a[i],i);
+}
+return new int[]{-1,-1};
+}
+}
+
+---
+
+## END
