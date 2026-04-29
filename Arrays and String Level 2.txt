@@ -1,0 +1,250 @@
+1. BONUS OF EMPLOYEES
+
+---
+
+import java.util.*;
+class Bonus{
+public static void main(String[]args){
+Scanner sc=new Scanner(System.in);
+double sal[]=new double[10],year[]=new double[10],bonus[]=new double[10],newSal[]=new double[10];
+double totalB=0,oldT=0,newT=0;
+for(int i=0;i<10;i++){
+sal[i]=sc.nextDouble();
+year[i]=sc.nextDouble();
+if(sal[i]<0||year[i]<0){i--;continue;}
+}
+for(int i=0;i<10;i++){
+if(year[i]>5) bonus[i]=sal[i]*0.05;
+else bonus[i]=sal[i]*0.02;
+newSal[i]=sal[i]+bonus[i];
+totalB+=bonus[i];
+oldT+=sal[i];
+newT+=newSal[i];
+}
+System.out.println(totalB+" "+oldT+" "+newT);
+}
+}
+
+---
+
+2. YOUNGEST & TALLEST
+
+---
+
+import java.util.*;
+class Friend{
+public static void main(String[]args){
+Scanner sc=new Scanner(System.in);
+int age[]=new int[3];
+double h[]=new double[3];
+String name[]={"Amar","Akbar","Anthony"};
+for(int i=0;i<3;i++){age[i]=sc.nextInt();h[i]=sc.nextDouble();}
+int min=0,max=0;
+for(int i=1;i<3;i++){
+if(age[i]<age[min]) min=i;
+if(h[i]>h[max]) max=i;
+}
+System.out.println(name[min]);
+System.out.println(name[max]);
+}
+}
+
+---
+
+3. LARGEST & SECOND LARGEST DIGIT
+
+---
+
+import java.util.*;
+class Digit{
+public static void main(String[]args){
+Scanner sc=new Scanner(System.in);
+int n=sc.nextInt();
+int a[]=new int[10],i=0;
+while(n!=0&&i<10){
+a[i++]=n%10;
+n/=10;
+}
+int max=0,sec=0;
+for(int j=0;j<i;j++){
+if(a[j]>max){sec=max;max=a[j];}
+else if(a[j]>sec&&a[j]!=max) sec=a[j];
+}
+System.out.println(max+" "+sec);
+}
+}
+
+---
+
+4. DYNAMIC ARRAY DIGITS
+
+---
+
+import java.util.*;
+class Digit2{
+public static void main(String[]args){
+Scanner sc=new Scanner(System.in);
+int n=sc.nextInt();
+int size=10,i=0;
+int a[]=new int[size];
+while(n!=0){
+if(i==size){
+size*=2;
+int b[]=new int[size];
+for(int j=0;j<i;j++) b[j]=a[j];
+a=b;
+}
+a[i++]=n%10;
+n/=10;
+}
+int max=0,sec=0;
+for(int j=0;j<i;j++){
+if(a[j]>max){sec=max;max=a[j];}
+else if(a[j]>sec&&a[j]!=max) sec=a[j];
+}
+System.out.println(max+" "+sec);
+}
+}
+
+---
+
+5. REVERSE NUMBER USING ARRAY
+
+---
+
+import java.util.*;
+class Rev{
+public static void main(String[]args){
+Scanner sc=new Scanner(System.in);
+int n=sc.nextInt(),c=0,temp=n;
+while(temp!=0){c++;temp/=10;}
+int a[]=new int[c];
+for(int i=0;i<c;i++){a[i]=n%10;n/=10;}
+for(int i=0;i<c;i++) System.out.print(a[i]);
+}
+}
+
+---
+
+6. BMI CALCULATION
+
+---
+
+import java.util.*;
+class BMI{
+public static void main(String[]args){
+Scanner sc=new Scanner(System.in);
+int n=sc.nextInt();
+double w[]=new double[n],h[]=new double[n],b[]=new double[n];
+String s[]=new String[n];
+for(int i=0;i<n;i++){w[i]=sc.nextDouble();h[i]=sc.nextDouble();}
+for(int i=0;i<n;i++){
+b[i]=w[i]/(h[i]*h[i]);
+if(b[i]<18.5) s[i]="Under";
+else if(b[i]<25) s[i]="Normal";
+else s[i]="Over";
+System.out.println(h[i]+" "+w[i]+" "+b[i]+" "+s[i]);
+}
+}
+}
+
+---
+
+7. BMI USING 2D ARRAY
+
+---
+
+import java.util.*;
+class BMI2{
+public static void main(String[]args){
+Scanner sc=new Scanner(System.in);
+int n=sc.nextInt();
+double a[][]=new double[n][3];
+String s[]=new String[n];
+for(int i=0;i<n;i++){
+a[i][0]=sc.nextDouble();
+a[i][1]=sc.nextDouble();
+a[i][2]=a[i][0]/(a[i][1]*a[i][1]);
+if(a[i][2]<18.5) s[i]="Under";
+else if(a[i][2]<25) s[i]="Normal";
+else s[i]="Over";
+System.out.println(a[i][0]+" "+a[i][1]+" "+a[i][2]+" "+s[i]);
+}
+}
+}
+
+---
+
+8. STUDENT MARKS & GRADE
+
+---
+
+import java.util.*;
+class Grade{
+public static void main(String[]args){
+Scanner sc=new Scanner(System.in);
+int n=sc.nextInt();
+double p[]=new double[n],per[]=new double[n];
+char g[]=new char[n];
+for(int i=0;i<n;i++){
+double a=sc.nextDouble(),b=sc.nextDouble(),c=sc.nextDouble();
+if(a<0||b<0||c<0){i--;continue;}
+per[i]=(a+b+c)/3;
+if(per[i]>=90) g[i]='A';
+else if(per[i]>=75) g[i]='B';
+else if(per[i]>=50) g[i]='C';
+else g[i]='F';
+System.out.println(per[i]+" "+g[i]);
+}
+}
+}
+
+---
+
+9. MARKS USING 2D ARRAY
+
+---
+
+import java.util.*;
+class Grade2{
+public static void main(String[]args){
+Scanner sc=new Scanner(System.in);
+int n=sc.nextInt();
+double a[][]=new double[n][3];
+for(int i=0;i<n;i++){
+a[i][0]=sc.nextDouble();
+a[i][1]=sc.nextDouble();
+a[i][2]=sc.nextDouble();
+double per=(a[i][0]+a[i][1]+a[i][2])/3;
+char g;
+if(per>=90) g='A';
+else if(per>=75) g='B';
+else if(per>=50) g='C';
+else g='F';
+System.out.println(per+" "+g);
+}
+}
+}
+
+---
+
+10. DIGIT FREQUENCY
+
+---
+
+import java.util.*;
+class Freq{
+public static void main(String[]args){
+Scanner sc=new Scanner(System.in);
+int n=sc.nextInt();
+int f[]=new int[10];
+while(n!=0){
+f[n%10]++;
+n/=10;
+}
+for(int i=0;i<10;i++)
+if(f[i]>0) System.out.println(i+" "+f[i]);
+}
+}
+
+ 

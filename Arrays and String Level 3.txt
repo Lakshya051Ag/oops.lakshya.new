@@ -1,0 +1,268 @@
+1. BMI (2D ARRAY + METHODS)
+
+---
+
+import java.util.*;
+class BMI{
+static String[][] calc(double a[][]){
+String r[][]=new String[10][4];
+for(int i=0;i<10;i++){
+double w=a[i][0],h=a[i][1]/100;
+double bmi=w/(h*h);
+String s;
+if(bmi<18.5) s="Under";
+else if(bmi<25) s="Normal";
+else s="Over";
+r[i][0]=a[i][0]+"";
+r[i][1]=a[i][1]+"";
+r[i][2]=bmi+"";
+r[i][3]=s;
+}
+return r;
+}
+public static void main(String[]args){
+Scanner sc=new Scanner(System.in);
+double a[][]=new double[10][2];
+for(int i=0;i<10;i++){
+a[i][0]=sc.nextDouble();
+a[i][1]=sc.nextDouble();
+}
+String r[][]=calc(a);
+for(int i=0;i<10;i++)
+System.out.println(r[i][0]+" "+r[i][1]+" "+r[i][2]+" "+r[i][3]);
+}
+}
+
+---
+
+2. UNIQUE CHARACTERS
+
+---
+
+import java.util.*;
+class Unique{
+static char[] find(String s){
+char a[]=new char[s.length()];
+int k=0;
+for(int i=0;i<s.length();i++){
+boolean f=true;
+for(int j=0;j<i;j++)
+if(s.charAt(i)==s.charAt(j)) f=false;
+if(f) a[k++]=s.charAt(i);
+}
+char r[]=new char[k];
+for(int i=0;i<k;i++) r[i]=a[i];
+return r;
+}
+public static void main(String[]args){
+Scanner sc=new Scanner(System.in);
+String s=sc.next();
+char r[]=find(s);
+for(char c:r) System.out.print(c+" ");
+}
+}
+
+---
+
+3. FIRST NON-REPEATING CHAR
+
+---
+
+import java.util.*;
+class NonRep{
+public static void main(String[]args){
+Scanner sc=new Scanner(System.in);
+String s=sc.next();
+int f[]=new int[256];
+for(int i=0;i<s.length();i++) f[s.charAt(i)]++;
+for(int i=0;i<s.length();i++){
+if(f[s.charAt(i)]==1){
+System.out.println(s.charAt(i));
+break;
+}
+}
+}
+}
+
+---
+
+4. FREQUENCY (ASCII METHOD)
+
+---
+
+import java.util.*;
+class Freq{
+public static void main(String[]args){
+Scanner sc=new Scanner(System.in);
+String s=sc.next();
+int f[]=new int[256];
+for(int i=0;i<s.length();i++) f[s.charAt(i)]++;
+for(int i=0;i<256;i++)
+if(f[i]>0) System.out.println((char)i+" "+f[i]);
+}
+}
+
+---
+
+5. FREQUENCY USING UNIQUE
+
+---
+
+import java.util.*;
+class Freq2{
+public static void main(String[]args){
+Scanner sc=new Scanner(System.in);
+String s=sc.next();
+int f[]=new int[256];
+for(int i=0;i<s.length();i++) f[s.charAt(i)]++;
+for(int i=0;i<s.length();i++){
+if(f[s.charAt(i)]>0){
+System.out.println(s.charAt(i)+" "+f[s.charAt(i)]);
+f[s.charAt(i)]=0;
+}
+}
+}
+}
+
+---
+
+6. FREQUENCY USING NESTED LOOP
+
+---
+
+import java.util.*;
+class Freq3{
+public static void main(String[]args){
+Scanner sc=new Scanner(System.in);
+char a[]=sc.next().toCharArray();
+int f[]=new int[a.length];
+for(int i=0;i<a.length;i++){
+f[i]=1;
+for(int j=i+1;j<a.length;j++){
+if(a[i]==a[j]){
+f[i]++;
+a[j]='0';
+}
+}
+}
+for(int i=0;i<a.length;i++)
+if(a[i]!='0') System.out.println(a[i]+" "+f[i]);
+}
+}
+
+---
+
+7. PALINDROME (3 METHODS)
+
+---
+
+import java.util.*;
+class Pal{
+static boolean check(String s){
+int i=0,j=s.length()-1;
+while(i<j){
+if(s.charAt(i)!=s.charAt(j)) return false;
+i++;j--;
+}
+return true;
+}
+static boolean rec(String s,int i,int j){
+if(i>=j) return true;
+if(s.charAt(i)!=s.charAt(j)) return false;
+return rec(s,i+1,j-1);
+}
+public static void main(String[]args){
+Scanner sc=new Scanner(System.in);
+String s=sc.next();
+System.out.println(check(s));
+System.out.println(rec(s,0,s.length()-1));
+}
+}
+
+---
+
+8. ANAGRAM
+
+---
+
+import java.util.*;
+class Ana{
+public static void main(String[]args){
+Scanner sc=new Scanner(System.in);
+String a=sc.next(),b=sc.next();
+if(a.length()!=b.length()){System.out.println(false);return;}
+int f[]=new int[256];
+for(int i=0;i<a.length();i++){
+f[a.charAt(i)]++;
+f[b.charAt(i)]--;
+}
+for(int x:f) if(x!=0){System.out.println(false);return;}
+System.out.println(true);
+}
+}
+
+---
+
+9. CALENDAR
+
+---
+
+import java.util.*;
+class Cal{
+public static void main(String[]args){
+Scanner sc=new Scanner(System.in);
+int m=sc.nextInt(),y=sc.nextInt();
+String mn[]={"","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
+int d[]={0,31,28,31,30,31,30,31,31,30,31,30,31};
+if((y%400==0)||(y%4==0&&y%100!=0)) d[2]=29;
+int y0=y-(14-m)/12;
+int x=y0+y0/4-y0/100+y0/400;
+int m0=m+12*((14-m)/12)-2;
+int d0=(1+x+31*m0/12)%7;
+System.out.println(mn[m]+" "+y);
+System.out.println("Sun Mon Tue Wed Thu Fri Sat");
+for(int i=0;i<d0;i++) System.out.print("    ");
+for(int i=1;i<=d[m];i++){
+System.out.printf("%3d ",i);
+if((i+d0)%7==0) System.out.println();
+}
+}
+}
+
+---
+
+10. DECK OF CARDS
+
+---
+
+import java.util.*;
+class Card{
+public static void main(String[]args){
+String suits[]={"Hearts","Diamonds","Clubs","Spades"};
+String ranks[]={"2","3","4","5","6","7","8","9","10","J","Q","K","A"};
+String deck[]=new String[52];
+int k=0;
+for(String s:suits)
+for(String r:ranks)
+deck[k++]=r+" of "+s;
+
+for(int i=0;i<52;i++){
+int r=i+(int)(Math.random()*(52-i));
+String t=deck[i];deck[i]=deck[r];deck[r]=t;
+}
+
+int players=4,cards=5;
+String p[][]=new String[players][cards];
+k=0;
+for(int i=0;i<players;i++)
+for(int j=0;j<cards;j++)
+p[i][j]=deck[k++];
+
+for(int i=0;i<players;i++){
+System.out.println("Player "+(i+1));
+for(int j=0;j<cards;j++)
+System.out.println(p[i][j]);
+}
+}
+}
+
